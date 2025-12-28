@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-   ifstream file("input/test.txt");  //opens the test.txt file 
+   ifstream file("input/solution.cpp");  //opens the test.txt file 
     //file = variable name
    
     string line;
@@ -15,6 +15,10 @@ int main() {
    
    while(getline(file,line)){
     cout<<line<<endl;
+
+    if(line.find("for")!= string::npos){    //detects key word "for" in every line.
+        cout<<"Found 'for' in this line"<<endl;
+    }
    }
 
    file.close();
