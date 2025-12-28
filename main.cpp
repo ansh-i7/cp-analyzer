@@ -13,13 +13,16 @@ int main() {
     return 0;
    }
    
+   int forCount=0;
    while(getline(file,line)){
     cout<<line<<endl;
 
     if(line.find("for")!= string::npos){    //detects key word "for" in every line.
-        cout<<"Found 'for' in this line"<<endl;
+       forCount++;
     }
    }
+
+   cout<<"Total for loops detected : "<<forCount<<endl;
 
    file.close();
    return 0;
