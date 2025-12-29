@@ -17,6 +17,8 @@ int main() {
    int openBraces=0;        //For brace tracking
    bool nestedLoop = false;
 
+   string timeComplexity = "O(1)";
+
    while(getline(file,line)){
     cout<<line<<endl;
 
@@ -44,6 +46,15 @@ int main() {
     cout<<"Nested Loop detected"<<endl;
    }
    else cout<<"No Nested Loop detected"<<endl;
+
+   if(nestedLoop){
+    timeComplexity= "O(n^2)";
+   }
+   else if(forCount==1){
+    timeComplexity= "O(n)";
+   }
+
+   cout<<"Estimated Time Complexity : "<<timeComplexity<<endl;
 
    file.close();
    return 0;
