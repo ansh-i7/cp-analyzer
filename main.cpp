@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+
 using namespace std;
 
 int main() {
@@ -25,6 +27,8 @@ int main() {
    string timeComplexity = "O(1)";
 
    while(getline(file,line)){
+            
+                /* -----> Ignoring Comments <----- */
 
     //Handles Multi-line comments
     if(inComment){
@@ -48,6 +52,8 @@ int main() {
     if(line.empty()) continue;      //skips analyzing empty line
 
     cout<<line<<endl;
+
+                /* ----> Recursion detection : stores the Function name <---- */
 
     if(recFunc_name.empty()){
         size_t pos_OpenBrac = line.find("(");
@@ -76,11 +82,15 @@ int main() {
         }
     }
 
+                        /* ----> Recursion Detection <---- */
+
     if( !recFunc_name.empty() && line.find(recFunc_name+"(")!=string::npos){
         if(line.find("{")==string::npos){     //with this i'll avoid counting the definition line as "{" comes after defining a function. 
             rec_detect=true;            
         }     
     }
+
+               /*  ----> Nested for loop detect and No. of for loops <---- */  
 
     if(line.find("for")!= string::npos){    //detects key word "for" in every line.
        forCount++;
@@ -95,7 +105,7 @@ int main() {
         openBraces++;
     }
 
-    if(line.find("}")!=string :: npos){
+    if(line.find("}")!=string::npos && openBraces > 0){
         openBraces--;
     }
  }
@@ -114,6 +124,7 @@ int main() {
    }
    else cout<<"No Nested Loop detected"<<endl;
 
+        //Estimated Time complexity 
    if(nestedLoop){
     timeComplexity= "O(n^2)";
    }
