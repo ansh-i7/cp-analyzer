@@ -16,10 +16,31 @@ int main() {
    int forCount=0;
    int openBraces=0;        //For brace tracking
    bool nestedLoop = false;
+   bool inComment=false;
 
    string timeComplexity = "O(1)";
 
    while(getline(file,line)){
+
+    //Handles Multi-line comments
+    if(inComment){
+        if(line.find("*/")!=string::npos){
+            inComment=false;
+        } 
+        continue;
+    }
+
+    if(line.find("/*")!=string ::npos){
+            inComment=true;
+            continue;
+    }
+
+    //Handles Single-line comments
+    size_t commentPos=line.find("//");
+    if(commentPos!=string::npos){
+        line=line.substr(0,commentPos);
+    }
+
     cout<<line<<endl;
 
     if(line.find("for")!= string::npos){    //detects key word "for" in every line.
