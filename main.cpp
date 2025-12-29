@@ -14,15 +14,36 @@ int main() {
    }
    
    int forCount=0;
+   int openBraces=0;        //For brace tracking
+   bool nestedLoop = false;
+
    while(getline(file,line)){
     cout<<line<<endl;
 
     if(line.find("for")!= string::npos){    //detects key word "for" in every line.
        forCount++;
+
+       //If a loop starts while another is already open -> nested loop = true
+       if(openBraces>0){
+        nestedLoop=true;
+       }
     }
-   }
+    
+    if(line.find("{")!=string :: npos){
+        openBraces++;
+    }
+
+    if(line.find("}")!=string :: npos){
+        openBraces--;
+    }
+ }
 
    cout<<"Total for loops detected : "<<forCount<<endl;
+
+   if(nestedLoop){
+    cout<<"Nested Loop detected"<<endl;
+   }
+   else cout<<"No Nested Loop detected"<<endl;
 
    file.close();
    return 0;
