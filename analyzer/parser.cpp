@@ -10,8 +10,7 @@ AnalysisResult analyzeFile(const string &filePath){
     result.recursion=false;
     result.timeComplexity = "O(1)";
 
-    ifstream file(filePath);  //opens the test.txt file 
-    //file = variable name
+    ifstream file(filePath);  
    
     string line;
 
@@ -21,8 +20,8 @@ AnalysisResult analyzeFile(const string &filePath){
    }
 
    
-    int openBraces=0;        //For brace tracking
-    bool inComment=false;  //For checking if inside a comment or not
+    int openBraces=0;        //tracks current brace depth
+    bool inComment=false;  //checks if inside a comment or not
     string recFunc_name = "";
 
     while(getline(file,line)){
@@ -48,7 +47,7 @@ AnalysisResult analyzeFile(const string &filePath){
         line=line.substr(0,commentPos);
     }
 
-    if(line.empty()) continue;      //skips analyzing empty line
+    if(line.empty()) continue;      
 
 
                 /* ----> Recursion detection : stores the Function name <---- */
@@ -90,7 +89,7 @@ AnalysisResult analyzeFile(const string &filePath){
 
                /*  ----> Nested for loop detect and No. of for loops <---- */  
 
-    if(line.find("for")!= string::npos){    //detects key word "for" in every line.
+    if(line.find("for")!= string::npos){    
        result.forCount++;
 
        //If a loop starts while another is already open -> nested loop = true
